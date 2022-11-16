@@ -1,7 +1,7 @@
 import React from "react";
 
-function video() {
+function Video() {
   return <div>video</div>;
 }
 
-export default video;
+export default Video;

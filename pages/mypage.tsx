@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
-function mypage() {
-  return <div>mypage</div>;
+function Mypage() {
+  const [cookie, setCookie] = useCookies<string>(["id"]);
+
+  useEffect(() => {
+    setCookie("idss", "hi");
+  }, [setCookie]);
+
+  return <div>{cookie.id}</div>;
 }
 
-export default mypage;
+export default Mypage;

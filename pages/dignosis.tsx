@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 
-function dignosis() {
+function Dignosis() {
   const onChange = async (e: any) => {
     const img = e.target.files[0];
     console.log(e.target.files[0]);
@@ -36,4 +36,4 @@ function dignosis() {
   );
 }
 
-export default dignosis;
+export default Dignosis;
