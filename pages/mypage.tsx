@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { userAtom } from "../src/store/user";
+import { useRecoilValue } from "recoil";
 
 function Mypage() {
-  const [cookie, setCookie] = useCookies<string>(["id"]);
+  const email = useRecoilValue(userAtom);
 
-  useEffect(() => {
-    setCookie("idss", "hi");
-  }, [setCookie]);
-
-  return <div>{cookie.id}</div>;
+  return (
+    <div>
+      <div>{email}</div>
+      <div>logout</div>
+    </div>
+  );
 }
 
 export default Mypage;
