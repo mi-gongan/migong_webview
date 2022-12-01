@@ -9,19 +9,17 @@ function Login() {
   const router = useRouter();
   const { ...validate } = router.query;
   const [email, setEmail] = useRecoilState(userAtom);
-  const [cookie, setCookie] = useCookies<string>(["user"]);
 
   const validateUser = useCallback(
     async (email: string, nonce: string) => {
       if (await checkUser(email, nonce)) {
         setEmail(email);
-        setCookie("email", email);
         router.push("/mypage");
       } else {
         router.push("/");
       }
     },
-    [router, setEmail, setCookie]
+    [router, setEmail]
   );
 
   useEffect(() => {

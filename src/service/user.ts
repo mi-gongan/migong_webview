@@ -12,11 +12,15 @@ export const checkUser = async (email: string, nonce: string) => {
       data.state === "request"
     ) {
       await setDoc(docRef, { state: "logined" }, { merge: true });
-      alert(1);
       return true;
     } else {
       return false;
     }
   }
   return false;
+};
+
+export const logoutUser = async (email: string) => {
+  const docRef = doc(db, "users", email);
+  await setDoc(docRef, { state: "logout" }, { merge: true });
 };
