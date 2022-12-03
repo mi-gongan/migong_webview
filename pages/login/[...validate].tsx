@@ -1,19 +1,20 @@
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect } from "react";
 import { checkUser } from "../../src/service/user";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { userAtom } from "../../src/store/user";
 import { useCookies } from "react-cookie";
+import { db } from "../../src/config/firebase";
 
 function Login() {
   const router = useRouter();
   const { ...validate } = router.query;
-  const [email, setEmail] = useRecoilState(userAtom);
+  const setEmail = useSetRecoilState(userAtom);
 
   const validateUser = useCallback(
-    async (email: string, nonce: string) => {
-      if (await checkUser(email, nonce)) {
-        setEmail(email);
+    async (_email: string, _nonce: string) => {
+      if (await checkUser(_email, _nonce)) {
+        setEmail(_email);
         router.push("/mypage");
       } else {
         router.push("/");
@@ -23,7 +24,6 @@ function Login() {
   );
 
   useEffect(() => {
-    console.log(validate.validate);
     if (validate.validate && validate.validate[0] && validate.validate[1]) {
       validateUser(validate.validate[0], validate.validate[1]);
     }

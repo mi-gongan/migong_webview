@@ -4,6 +4,12 @@ import AppBar from "../src/components/layouts/AppBar";
 import BottomBar from "../src/components/layouts/BottomBar";
 import { RecoilRoot } from "recoil";
 
+declare global {
+  interface Window {
+    webviewChannel: any;
+  }
+}
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>

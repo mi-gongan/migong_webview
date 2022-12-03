@@ -8,13 +8,17 @@ function Mypage() {
   const [email, setEmail] = useRecoilState(userAtom);
 
   const handleLogout = async () => {
+    if (window.webviewChannel) {
+      window.webviewChannel.postMessage("logout");
+    }
     setEmail("");
     await logoutUser(email);
   };
   return (
     <div>
+      <div>mypage</div>
       <div>{email}</div>
-      <div onClick={handleLogout}>logout</div>
+      {email && <div onClick={handleLogout}>logout</div>}
     </div>
   );
 }
