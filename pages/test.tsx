@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   FaceLandmarker,
   FaceLandmarkerOptions,
@@ -67,28 +67,7 @@ function Avatar({ url }: { url: string }) {
 }
 
 function Test() {
-  const setup = async () => {
-    const filesetResolver = await FilesetResolver.forVisionTasks(
-      "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm"
-    );
-    faceLandmarker = await FaceLandmarker.createFromOptions(
-      filesetResolver,
-      options
-    );
-
-    video = document.getElementById("video") as HTMLVideoElement;
-    navigator.mediaDevices
-      .getUserMedia({
-        video: { width: 1280, height: 720 },
-        audio: false,
-      })
-      .then(function (stream) {
-        video.srcObject = stream;
-        video.addEventListener("loadeddata", predict);
-      });
-  };
-
-  const predict = async () => {
+  const predict = useCallback(async () => {
     let nowInMs = Date.now();
     if (lastVideoTime !== video.currentTime) {
       lastVideoTime = video.currentTime;
@@ -112,11 +91,32 @@ function Test() {
     }
 
     window.requestAnimationFrame(predict);
-  };
+  }, []);
+
+  const setup = useCallback(async () => {
+    const filesetResolver = await FilesetResolver.forVisionTasks(
+      "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm"
+    );
+    faceLandmarker = await FaceLandmarker.createFromOptions(
+      filesetResolver,
+      options
+    );
+
+    video = document.getElementById("video") as HTMLVideoElement;
+    navigator.mediaDevices
+      .getUserMedia({
+        video: { width: 1280, height: 720 },
+        audio: false,
+      })
+      .then(function (stream) {
+        video.srcObject = stream;
+        video.addEventListener("loadeddata", predict);
+      });
+  }, [predict]);
 
   useEffect(() => {
     setup();
-  }, []);
+  }, [setup]);
 
   return (
     <div className="Test">
