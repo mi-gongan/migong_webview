@@ -11,6 +11,7 @@ const Wrap = styled.div`
   background-color: black;
   color: white;
   height: 80px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

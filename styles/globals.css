@@ -1,7 +1,12 @@
-html,
+html {
+  background-color: rgb(39, 39, 39);
+}
 body {
-  padding: 0;
-  margin: 0;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: white;
+  min-height: 100vh;
+  position: relative;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }

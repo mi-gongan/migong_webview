@@ -1,7 +1,7 @@
 import React from "react";
 
 function Video() {
-  return <div>video</div>;
+  return <input type="text"></input>;
 }
 
 export default Video;

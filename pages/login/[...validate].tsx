@@ -1,10 +1,8 @@
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect } from "react";
 import { checkUser } from "../../src/service/user";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { userAtom } from "../../src/store/user";
-import { useCookies } from "react-cookie";
-import { db } from "../../src/config/firebase";
 
 function Login() {
   const router = useRouter();
